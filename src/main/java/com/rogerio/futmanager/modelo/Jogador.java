@@ -1,6 +1,7 @@
 package com.rogerio.futmanager.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +14,15 @@ public class Jogador {
     private LocalDate nascimento;
     @Enumerated(EnumType.STRING)
     private Posicao posicao;
+    @Enumerated(EnumType.STRING)
+    private Time time;
+    @ManyToOne
+    private Partida partida;
+
+    //TODO: Atributos que vão pertencer ao jogador:
+    // private Boolean mensalista;
+    // private Nota nota;
+
 
     public Jogador(String nome, LocalDate nascimento, Posicao posicao) {
         this.nome = nome;
@@ -55,4 +65,5 @@ public class Jogador {
     public void setPosicao(Posicao posicao) {
         this.posicao = posicao;
     }
+
 }

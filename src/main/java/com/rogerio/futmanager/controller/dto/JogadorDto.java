@@ -15,18 +15,19 @@ public class JogadorDto {
     private LocalDate nascimento;
     private Posicao posicao;
 
-    public JogadorDto(Long id, String nome, LocalDate nascimento, Posicao posicao) {
-        this.id = id;
-        this.nome = nome;
-        this.nascimento = nascimento;
-        this.posicao = posicao;
+    public JogadorDto(Jogador jogador) {
+        this.id = jogador.getId();
+        this.nome = jogador.getNome();
+        this.nascimento = jogador.getNascimento();
+        this.posicao = jogador.getPosicao();
     }
+
 
     public static List<JogadorDto> converter(List<Jogador> jogadores) {
         List<JogadorDto> jogadorList = new ArrayList<>();
 
         for (Jogador jogador :jogadores){
-            jogadorList.add(new JogadorDto(jogador.getId(), jogador.getNome(), jogador.getNascimento(), jogador.getPosicao()));
+            jogadorList.add(new JogadorDto(jogador));
         }
         return  jogadorList;
     }
