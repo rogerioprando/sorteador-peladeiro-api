@@ -12,14 +12,19 @@ public class JogadorDto {
 
     private Long id;
     private String nome;
-    private LocalDate nascimento;
     private Posicao posicao;
+    private int passe;
+    private int chute;
+    private double nota;
+
 
     public JogadorDto(Jogador jogador) {
         this.id = jogador.getId();
         this.nome = jogador.getNome();
-        this.nascimento = jogador.getNascimento();
         this.posicao = jogador.getPosicao();
+        this.passe = jogador.getPasse();
+        this.chute = jogador.getChute();
+        this.nota = jogador.getNota();
     }
 
 
@@ -40,11 +45,19 @@ public class JogadorDto {
         return nome;
     }
 
-    public LocalDate getNascimento() {
-        return nascimento;
-    }
-
     public Posicao getPosicao() {
         return posicao;
+    }
+
+    public int getPasse() {
+        return passe;
+    }
+
+    public int getChute() {
+        return chute;
+    }
+
+    public double getNota() {
+        return nota;
     }
 }
