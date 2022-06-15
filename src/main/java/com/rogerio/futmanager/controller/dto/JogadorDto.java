@@ -2,6 +2,7 @@ package com.rogerio.futmanager.controller.dto;
 
 import com.rogerio.futmanager.modelo.Jogador;
 import com.rogerio.futmanager.modelo.Posicao;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,13 +29,14 @@ public class JogadorDto {
     }
 
 
-    public static List<JogadorDto> converter(List<Jogador> jogadores) {
-        List<JogadorDto> jogadorList = new ArrayList<>();
-
-        for (Jogador jogador :jogadores){
-            jogadorList.add(new JogadorDto(jogador));
-        }
-        return  jogadorList;
+    public static Page<JogadorDto> converter(Page<Jogador> jogadores) {
+//        List<JogadorDto> jogadorList = new ArrayList<>();
+//
+//        for (Jogador jogador :jogadores){
+//            jogadorList.add(new JogadorDto(jogador));
+//        }
+//        return  jogadorList;
+        return jogadores.map(JogadorDto::new);
     }
 
     public Long getId() {

@@ -5,14 +5,17 @@ import com.rogerio.futmanager.controller.form.JogadorForm;
 import com.rogerio.futmanager.modelo.Jogador;
 import com.rogerio.futmanager.repository.JogadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,15 +26,15 @@ public class JogadorController {
     private JogadorRepository jogadorRepository;
 
     @RequestMapping()
-    public List<JogadorDto> listaJogadores(String nomeJogador) {
+    public Page<JogadorDto> listaJogadores(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable paginacao) {
 
-        List<Jogador> jogadores = jogadorRepository.findAll();
+        Page<Jogador> jogadores = jogadorRepository.findAll(paginacao);
 
         return JogadorDto.converter(jogadores);
     }
 
     @PostMapping
-    public ResponseEntity<JogadorDto> cadastrar(@RequestBody JogadorForm form, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<JogadorDto> cadastrar(@RequestBody @Valid JogadorForm form, UriComponentsBuilder uriBuilder) {
         Jogador jogador = form.converter();     // Por enquanto sem nenhuma relação, não passa nada pro converter().
         jogadorRepository.save(jogador);
 
@@ -53,7 +56,7 @@ public class JogadorController {
     // TODO: Para controlar melhor os parâmetros que podem ser atualizados criar um JogadorFormDeAtualizacao
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<JogadorDto> atualizar(@PathVariable Long id, @RequestBody JogadorForm form) {
+    public ResponseEntity<JogadorDto> atualizar(@PathVariable Long id, @RequestBody @Valid JogadorForm form) {
         Optional<Jogador> jogadorOptional = jogadorRepository.findById(id);
         if (jogadorOptional.isPresent()) {
             Jogador jogador = form.atualizar(id, jogadorRepository);

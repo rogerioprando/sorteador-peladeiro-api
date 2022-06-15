@@ -4,16 +4,18 @@ import com.rogerio.futmanager.modelo.Jogador;
 import com.rogerio.futmanager.modelo.Posicao;
 import com.rogerio.futmanager.repository.JogadorRepository;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import java.time.LocalDate;
+import javax.validation.constraints.*;
 
 public class JogadorForm {
 
+    @NotNull @NotEmpty
     private String nome;
     private Posicao posicao;
+    @Min(1) @Max(99)
     private int passe;
+    @Min(1) @Max(99)
     private int chute;
+    @Min(1) @Max(99)
     private double nota;
 
     public String getNome() {
