@@ -1,20 +1,14 @@
-package com.rogerio.futmanager.modelo;
+package com.rogerio.futmanager.controller.dto;
 
-import javax.persistence.*;
+import com.rogerio.futmanager.modelo.Jogador;
+import com.rogerio.futmanager.modelo.Posicao;
+import org.springframework.data.domain.Page;
 
-@Entity
-public class Jogador {
+public class JogadorDtoDetalhado {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @Enumerated(EnumType.STRING)
     private Posicao posicao;
-    @Enumerated(EnumType.STRING)
-    private Time time;
-    @ManyToOne
-    private Partida partida;
     private int passe;
     private int finalizacao;
     private int desarme;
@@ -29,33 +23,29 @@ public class Jogador {
     private int folego;
     private double nota;
 
-    //TODO: Atributos que vão pertencer ao jogador:
-    // private Boolean mensalista;
-    // private Nota nota;
 
-
-    public Jogador(String nome, Posicao posicao,
-                   int passe, int finalizacao, int desarme, int cobertura, int lancamento, int drible,
-                   int fominha, int chuteLongo, int velocidade, int forca, int dominio, int folego, double nota) {
-        this.nome = nome;
-        this.posicao = posicao;
-        this.passe = passe;
-        this.finalizacao = finalizacao;
-        this.desarme = desarme;
-        this.cobertura = cobertura;
-        this.lancamento = lancamento;
-        this.drible = drible;
-        this.fominha = fominha;
-        this.chuteLongo = chuteLongo;
-        this.velocidade = velocidade;
-        this.forca = forca;
-        this.dominio = dominio;
-        this.folego = folego;
-        this.nota = nota;
+    public JogadorDtoDetalhado(Jogador jogador) {
+        this.id = jogador.getId();
+        this.nome = jogador.getNome();
+        this.posicao = jogador.getPosicao();
+        this.passe = jogador.getPasse();
+        this.finalizacao = jogador.getFinalizacao();
+        this.desarme = jogador.getDesarme();
+        this.cobertura = jogador.getCobertura();
+        this.lancamento = jogador.getLancamento();
+        this.drible = jogador.getDrible();
+        this.fominha = jogador.getFominha();
+        this.chuteLongo = jogador.getChuteLongo();
+        this.velocidade = jogador.getVelocidade();
+        this.forca = jogador.getForca();
+        this.dominio = jogador.getDominio();
+        this.folego = jogador.getFolego();
+        this.nota = jogador.getNota();
     }
 
-    public Jogador() {
 
+    public static Page<JogadorDtoDetalhado> converter(Page<Jogador> jogadores) {
+        return jogadores.map(JogadorDtoDetalhado::new);
     }
 
     public Long getId() {
@@ -70,48 +60,36 @@ public class Jogador {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Posicao getPosicao() {
         return posicao;
-    }
-
-    public void setPosicao(Posicao posicao) {
-        this.posicao = posicao;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
-    public Partida getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
     }
 
     public int getPasse() {
         return passe;
     }
 
-    public void setPasse(int passe) {
-        this.passe = passe;
-    }
-
     public int getFinalizacao() {
         return finalizacao;
     }
 
-    public void setFinalizacao(int chute) {
-        this.finalizacao = chute;
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPosicao(Posicao posicao) {
+        this.posicao = posicao;
+    }
+
+    public void setPasse(int passe) {
+        this.passe = passe;
+    }
+
+    public void setFinalizacao(int finalizacao) {
+        this.finalizacao = finalizacao;
     }
 
     public int getDesarme() {
@@ -192,10 +170,6 @@ public class Jogador {
 
     public void setFolego(int folego) {
         this.folego = folego;
-    }
-
-    public double getNota() {
-        return nota;
     }
 
     public void setNota(double nota) {

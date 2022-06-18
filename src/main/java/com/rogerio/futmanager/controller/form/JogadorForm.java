@@ -14,7 +14,17 @@ public class JogadorForm {
     @Min(1) @Max(99)
     private int passe;
     @Min(1) @Max(99)
-    private int chute;
+    private int finalizacao;
+    private int desarme;
+    private int cobertura;
+    private int lancamento;
+    private int drible;
+    private int fominha;
+    private int chuteLongo;
+    private int velocidade;
+    private int forca;
+    private int dominio;
+    private int folego;
     @Min(1) @Max(99)
     private double nota;
 
@@ -43,11 +53,11 @@ public class JogadorForm {
     }
 
     public int getChute() {
-        return chute;
+        return finalizacao;
     }
 
     public void setChute(int chute) {
-        this.chute = chute;
+        this.finalizacao = chute;
     }
 
     public double getNota() {
@@ -64,7 +74,9 @@ public class JogadorForm {
         * recebe o repository, busca relação e devolve new Jogador.
         */
 
-        return new Jogador(nome, posicao, passe, chute, nota);
+        return new Jogador(nome, posicao,
+        passe, finalizacao, desarme, cobertura, lancamento, drible,
+        fominha, chuteLongo, velocidade, forca, dominio, folego, nota);
 
     }
 
@@ -73,7 +85,7 @@ public class JogadorForm {
         Jogador jogador = jogadorRepository.getById(id);
         jogador.setNome(this.nome);
         jogador.setPosicao(this.posicao);
-        jogador.setChute(this.chute);
+        jogador.setFinalizacao(this.finalizacao);
         jogador.setPasse(this.passe);
         jogador.setNota(this.nota);
 

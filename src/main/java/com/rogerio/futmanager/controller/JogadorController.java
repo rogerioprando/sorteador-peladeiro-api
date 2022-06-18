@@ -1,6 +1,7 @@
 package com.rogerio.futmanager.controller;
 
 import com.rogerio.futmanager.controller.dto.JogadorDto;
+import com.rogerio.futmanager.controller.dto.JogadorDtoDetalhado;
 import com.rogerio.futmanager.controller.form.JogadorForm;
 import com.rogerio.futmanager.modelo.Jogador;
 import com.rogerio.futmanager.repository.JogadorRepository;
@@ -45,12 +46,13 @@ public class JogadorController {
 
     // TODO: Criar um JogadorDto detalhado para os futuros atributos do Jogador.
     @GetMapping("/{id}")
-    public ResponseEntity<JogadorDto> detalhar(@PathVariable Long id) {
+    public ResponseEntity<JogadorDtoDetalhado> detalhar(@PathVariable Long id) {
         Optional<Jogador> jogador = jogadorRepository.findById(id);
         if (jogador.isPresent()) {
-            return ResponseEntity.ok(new JogadorDto(jogador.get()));
+            return ResponseEntity.ok(new JogadorDtoDetalhado(jogador.get()));
         }
         return ResponseEntity.notFound().build();
+        //return jogador.map(value -> ResponseEntity.ok(new JogadorDto(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // TODO: Para controlar melhor os parâmetros que podem ser atualizados criar um JogadorFormDeAtualizacao
