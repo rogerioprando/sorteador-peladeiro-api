@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface JogadorRepository extends JpaRepository<Jogador, Long> {
 
-    List<Jogador> findByNome(String nome);
+    Jogador findByNome(String nome);
 
 
 }

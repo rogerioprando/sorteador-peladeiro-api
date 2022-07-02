@@ -1,6 +1,7 @@
 package com.rogerio.peladeiro.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Jogador {
@@ -13,8 +14,8 @@ public class Jogador {
     private Posicao posicao;
     @Enumerated(EnumType.STRING)
     private Time time;
-    @ManyToOne
-    private Partida partida;
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Partida> partida;
     private int passe;
     private int finalizacao;
     private int desarme;
@@ -88,14 +89,6 @@ public class Jogador {
 
     public void setTime(Time time) {
         this.time = time;
-    }
-
-    public Partida getPartida() {
-        return partida;
-    }
-
-    public void setPartida(Partida partida) {
-        this.partida = partida;
     }
 
     public int getPasse() {

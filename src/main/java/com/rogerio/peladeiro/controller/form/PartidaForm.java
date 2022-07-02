@@ -11,15 +11,15 @@ import java.util.List;
 
 public class PartidaForm {
 
-    private LocalDate data;
+    private String data;
     private Time vencedor;
-    private List<Jogador> jogadores;
+    private List<JogadorForm> jogadores;
 
-    public LocalDate getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -31,22 +31,22 @@ public class PartidaForm {
         this.vencedor = vencedor;
     }
 
-    public List<Jogador> getJogadores() {
+    public List<JogadorForm> getJogadores() {
         return jogadores;
     }
 
-    public void setJogadores(List<Jogador> jogadores) {
+    public void setJogadores(List<JogadorForm> jogadores) {
         this.jogadores = jogadores;
     }
 
-    public Partida converter(JogadorRepository jogadorRepository){
+        public Partida converter(JogadorRepository jogadorRepository){
         List<Jogador> listaJogadores = new ArrayList<>();
-        for(Jogador jogador : jogadores){
-            String nome = jogador.getNome();
-            Jogador jog1 = (Jogador) jogadorRepository.findByNome(nome);
+        for(JogadorForm jogador : jogadores){
+            Jogador jog1 = jogadorRepository.findByNome(jogador.getNome());
             listaJogadores.add(jog1);
         }
 
-        return new Partida(data, vencedor, listaJogadores);
+        return new Partida(LocalDate.parse(data), vencedor, listaJogadores);
     }
+
 }

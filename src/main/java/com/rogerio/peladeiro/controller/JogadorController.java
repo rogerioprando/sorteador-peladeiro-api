@@ -27,8 +27,8 @@ public class JogadorController {
     private JogadorRepository jogadorRepository;
 
     @GetMapping
-    public Page<JogadorDto> listar(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable paginacao) {
-
+    public Page<JogadorDto> listar(@PageableDefault(sort = "id", size = 20, direction = Sort.Direction.ASC) Pageable paginacao) {
+        // /jogadores?page=0&size=20&sort=id,asc
         Page<Jogador> jogadores = jogadorRepository.findAll(paginacao);
 
         return JogadorDto.converter(jogadores);

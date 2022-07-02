@@ -14,8 +14,7 @@ public class Partida {
     private LocalDate data;
     @Enumerated(EnumType.STRING)
     private Time vencedor;
-
-    @OneToMany(mappedBy = "partida")
+    @OneToMany
     private List<Jogador> jogadores = new ArrayList<>();
 
     public Partida() {
